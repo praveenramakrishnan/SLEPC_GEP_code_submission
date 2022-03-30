@@ -1,0 +1,12 @@
+1) First step is to install petsc and slepc.
+   For this, the environment variables, PETSC_DIR, PETSC_ARCH and SLEPC_DIR have to be set.
+   To do this open the file ~/.bashrc and enter the following three lines 
+   ("path_to_slepc" and "path_to_slepc" have to be replaced by the actual paths of the directories":
+   export PETSC_DIR="path_to_petsc"
+   export PETSC_ARCH=arch-linux-c-opt-complex-mumps
+   export SLEPC_DIR="path_to_slepc"
+
+2) Next, go to the petsc directory and run the bash script "runfile_my_petsc_configuration".
+   This will start the configuration. Wait for it to complete.
+   (At this stage if there is some dependency issue, an error message will be displayed).
+   After successful configuration, a message will appear buil petsc using make.

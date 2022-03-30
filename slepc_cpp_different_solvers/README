@@ -1,0 +1,29 @@
+This repository contains the source code for solving the generalized eigenvalue problem (GEP) 
+arising in characteristic mode analysis.
+
+There are two directories in the repository:
+1) src
+2) example_freq_100MHz_epsr_4-1j_ur_1
+
+The directory "src" contains the FORTRAN source files, "main.cpp" and "read_dense_marix_complex.h", and a makefile.
+The "main.cpp" file contains the source code for solving the GEP using the
+SLEPc library and "read_dense_marix_complex.h" contains a function to read in the input data files.
+The details about the code can be found in their respective header files and the comments therein.
+
+The directory "example_freq_100MHz_eps_4-1j_ur_1" contains a set of examples for the solution of the GEP.
+The directory contains the subdirectory called "data" which has the input files: 
+"real_parts.txt", "imag_parts.txt", "weight_matrix.txt", 
+and also a file "zero_matrix.txt", which serves as the imaginary part of the weight matrix. 
+Apart from the "data" directory, there are a number of directories with bach scripts for the execution of the source files.
+This includes either direct or iterative linear solve in combination with various methods like
+arnoldi, arpack, krylovschur, ciss (see SLEPc manual for details.).
+Any case can be run using typing "./runfile" on the bash terminal.
+
+The instructions on installing SLEPc library can be found on their official website (https://slepc.upv.es/).
+SLEPc uses the library PETSc (https://petsc.org/release/) for underlying linear algebraic structures.
+
+While installing PETSc, the following configuration will be useful and will download and install the required packages:
+./configure --download-superlu_dist --download-parmetis --download-metis --download-make --download-mumps --download-scalapack --    with-debugging=0 --with-scalar-type=complex
+
+For SLEPc, the ARPACK library can be installed with the following configuration:
+/configure --download-arpack

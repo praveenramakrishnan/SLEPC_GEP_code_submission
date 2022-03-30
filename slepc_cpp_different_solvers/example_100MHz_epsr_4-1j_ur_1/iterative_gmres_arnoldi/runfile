@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cp ../../src/* .
+cp ../data/* .
+mv zero* zero_matrix.txt
+
+num_cores=1
+nev=30
+
+make main
+echo $nev > input.txt
+time mpiexec -n $num_cores ./main  -eps_type arnoldi -st_type sinvert -eps_target 0 -st_ksp_type gmres -st_pc_type bjacobi -eps_monitor_conv  -eps_view_vectors -log_view < input.txt > slepc_solution1.txt
+
+rm main
+rm *.cpp *.h makefile
+rm real_parts.txt imag_parts.txt weight_matrix.txt zero_matrix.txt input.txt

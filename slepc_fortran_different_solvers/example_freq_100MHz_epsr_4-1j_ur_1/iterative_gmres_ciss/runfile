@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cp ../../src/* .
+cp ../data/* .
+mv zero* zero_matrix.txt
+
+num_cores=1
+nev=30
+
+gfortran -ffree-form -c module_file.F90
+make main
+echo $nev > input.txt
+time mpiexec -n $num_cores ./main  -eps_type ciss -rg_type interval -rg_interval_endpoints -3000,0,-8000,8000 -st_ksp_type gmres -st_pc_type bjacobi -eps_monitor_conv  -eps_view_vectors -log_view < input.txt > slepc_solution1.txt
+
+rm main
+rm *.F90 *.o *.mod makefile 
+rm real_parts.txt imag_parts.txt weight_matrix.txt zero_matrix.txt input.txt

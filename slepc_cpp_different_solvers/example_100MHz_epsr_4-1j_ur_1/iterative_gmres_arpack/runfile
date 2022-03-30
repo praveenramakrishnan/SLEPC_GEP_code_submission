@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#Configuration
+cp ../../src/* .
+cp ../data/* .
+mv zero* zero_matrix.txt
+num_cores=1
+nev=30
+
+#Execution
+make main
+echo $nev > input.txt
+time mpiexec -n $num_cores ./main  -eps_type arpack -st_type sinvert -eps_target 0 -st_ksp_type gmres -st_pc_type bjacobi -eps_monitor_conv  -eps_view_vectors -log_view < input.txt > slepc_solution1.txt
+
+#Clean
+rm main
+rm real_parts.txt imag_parts.txt weight_matrix.txt zero* input.txt
+rm *.cpp *.h makefile

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cp ../../src/* .
+cp ../data/* .
+mv zero* zero_matrix.txt
+
+
+make main
+num_cores=4
+nev=30
+echo $nev > input.txt
+time OMP_NUM_THREADS=$num_cores ./main  -eps_type krylovschur -st_type sinvert -eps_target 0 -st_ksp_type preonly -st_pc_type lu -st_pc_factor_matrix_solver_type mumps -eps_monitor_conv  -eps_view_vectors -log_view < input.txt > 'slepc_solution_'$num_cores'.txt'
+
+rm main
+rm *.cpp *.h makefile 
+rm real_parts.txt imag_parts.txt weight_matrix.txt zero_matrix.txt input.txt
