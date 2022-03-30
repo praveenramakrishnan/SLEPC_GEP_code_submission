@@ -1,4 +1,14 @@
-1) First step is to install petsc and slepc.
+1) The directory contains the following files:
+    1.petsc.tar.gz
+    2.slepc.tar.gz
+    3.slepc_cpp_different_solvers
+    4.slepc_fortran_different_solvers
+
+    You may unzip the petsc and slepc libraries using the commands:
+    tar xzf petsc.tar.gz
+    tar xzf slepc.tar.gz
+
+2) First step is to install petsc and slepc.
    For this, the environment variables, PETSC_DIR, PETSC_ARCH and SLEPC_DIR have to be set.
    To do this open the file ~/.bashrc and enter the following three lines 
    ("path_to_slepc" and "path_to_slepc" have to be replaced by the actual paths of the directories":
@@ -6,7 +16,27 @@
    export PETSC_ARCH=arch-linux-c-opt-complex-mumps
    export SLEPC_DIR="path_to_slepc"
 
-2) Next, go to the petsc directory and run the bash script "runfile_my_petsc_configuration".
+3) Next, go to the directory "petsc" and run the bash script "runfile_configure_petsc".
    This will start the configuration. Wait for it to complete.
    (At this stage if there is some dependency issue, an error message will be displayed).
-   After successful configuration, a message will appear buil petsc using make.
+   After successful configuration, a message will appear build petsc using make.
+   Upon successfuly building petsc library, one can move on to building slepc.
+
+4) Go to the directory "slepc" and run the bash script "runfile_configure_petsc".
+   Finish the configuration and build.
+
+5) Now, to run FORTRAN code, go to the directory "slepc_fortran_different_solvers".
+   This directory contains the following sub direcories:
+   "src", "example_freq_100MHz_epsr_4-1j_ur_1".
+   A "README" file is also provided here explaining the structure of the directories.
+   The directory "src" contains the source codes.
+   The directory "example_freq_100MHz_epsr_4-1j_ur_1" contains a subdirectory for "data"
+   and other subdirectories running the example using different methods available in SLEPC.
+   To run any example, go to the corresponding folder and run the bash script provided.
+
+   For instance, to run the example using krylovschur method along with mumps linear solver, 
+   go to "slepc_fortran_different_solvers/example_freq_100MHz_epsr_4-1j_ur_1/iterative_gmres_krylov_schur"
+   and run the bash script "runfile".
+
+6) The folder "slepc_cpp_different_solvers" contains the C++ source codes and all the examples can be run
+   in a similar way as mentioned above for FORTRAN code.
